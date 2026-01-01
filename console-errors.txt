@@ -1,0 +1,21 @@
+api/leaderboard?timeframe=weekly:1  Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+
+fetch.ts:7  GET https://lmuidrjrtpkvtbfnidzp.supabase.co/rest/v1/chat_channels?select=id&name=eq.general 406 (Not Acceptable)
+(anonymous)	@	fetch.ts:7
+(anonymous)	@	fetch.ts:34
+await in (anonymous)		
+then	@	PostgrestBuilder.ts:122
+
+
+fetch.ts:7  GET https://lmuidrjrtpkvtbfnidzp.supabase.co/rest/v1/friendships?select=*%2Cprofile%3Aprofiles%21friendships_friend_id_fkey%28username%2Cavatar_url%29&user_id=eq.fa0dc63a-1cb9-4d0f-9574-dc859f5d4a13&status=eq.accepted 400 (Bad Request)
+(anonymous)	@	fetch.ts:7
+(anonymous)	@	fetch.ts:34
+await in (anonymous)		
+then	@	PostgrestBuilder.ts:122
+
+fetch.ts:7  GET https://lmuidrjrtpkvtbfnidzp.supabase.co/rest/v1/friendships?select=*%2Cprofile%3Aprofiles%21friendships_user_id_fkey%28username%2Cavatar_url%29&friend_id=eq.fa0dc63a-1cb9-4d0f-9574-dc859f5d4a13&status=eq.pending 400 (Bad Request)
+(anonymous)	@	fetch.ts:7
+(anonymous)	@	fetch.ts:34
+await in (anonymous)		
+then	@	PostgrestBuilder.ts:122
+

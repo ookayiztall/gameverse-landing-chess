@@ -1,0 +1,89 @@
+body {
+    height: 100vh;
+    background: #0a2351 ;
+}
+
+h1 {
+    margin: 2rem;
+    text-align: center;
+    color: white;
+    font-family: arial;
+}
+
+h2 {
+    font-family: arial;
+    font-size: 26px;
+    color: skyblue;
+}
+
+.game-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    perspective: 1000px;
+}
+
+#game-area{
+    z-index: 1;
+    width: 85%;
+    transform: rotateX(35deg);
+    padding: 0 2rem 2rem 2rem;
+    background: #6E260E;
+	border:5px solid green;
+}
+
+#dealer-area {
+    margin-bottom: 2rem;
+}
+
+#dealer-cards {
+    transform: translateY(-40px);
+    display: flex;
+    justify-content: center;
+    height: 168px;
+}
+
+#player-area #announcement {
+    margin-left: 25%;
+}
+
+#player-cards {
+    display: flex;
+    justify-content: center;
+    height: 168px;
+}
+
+#action-area {
+    z-index: 10;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+}
+
+#next-hand, #hit-me {
+    margin-bottom: 3rem;
+}
+
+button {
+    background: #318CE7;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 1rem;
+    outline: none;
+	color:#fff;
+}
+
+button:hover{
+	cursor:pointer;
+}
+
+img {
+    width: 130px;
+    height: 190px;
+}
+
+@media (min-width: 1200px) {
+    body {
+        padding: 0 12%;
+    }
+}
