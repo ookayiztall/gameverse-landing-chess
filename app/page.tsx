@@ -1,15 +1,5 @@
-import { redirect } from "next/navigation"
-import { createClient } from "@/lib/supabase/server"
+import { LandingPage } from "@/components/landing/landing-page"
 
-export default async function RootPage() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (user) {
-    redirect("/dashboard") // Fixed route - removed /protected prefix
-  } else {
-    redirect("/login") // Fixed route - removed /auth prefix
-  }
+export default function RootPage() {
+  return <LandingPage />
 }

@@ -3,7 +3,7 @@
 import { useMemo, useState, useEffect } from "react"
 import { createBrowserClient } from "@/lib/supabase/client"
 import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
@@ -215,11 +215,14 @@ export default function UsersManagementPage() {
                       </Button>
                     ) : (
                       <Select onValueChange={(days) => banUser(user.user_id, Number.parseInt(days))}>
-                        <SelectTrigger asChild>
-                          <Button size="sm" variant="destructive">
-                            <UserX className="h-4 w-4 mr-2" />
+                        <SelectTrigger
+                          size="sm"
+                          className={`${buttonVariants({ variant: "destructive", size: "sm" })} border-0 shadow-none py-0 [&>svg]:hidden`}
+                        >
+                          <span className="inline-flex items-center gap-2">
+                            <UserX className="h-4 w-4" />
                             Ban
-                          </Button>
+                          </span>
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="1">1 Day</SelectItem>

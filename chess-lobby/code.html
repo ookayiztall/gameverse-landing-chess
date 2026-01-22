@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GameVerse - 3D Chess Lobby</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#8b5cf6", // Vibrant Purple
+              "background-light": "#f8fafc",
+              "background-dark": "#0b0e14",
+              "surface-light": "#ffffff",
+              "surface-dark": "#161b22",
+            },
+            fontFamily: {
+              display: ["Outfit", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.75rem",
+              'xl': '1rem',
+              '2xl': '1.5rem',
+            },
+          },
+        },
+      };
+    </script>
+<style>
+        body {
+            font-family: 'Outfit', sans-serif;
+        }
+        .glass-effect {
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .chess-pattern {
+            background-image: radial-gradient(circle at 2px 2px, rgba(139, 92, 246, 0.1) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen chess-pattern transition-colors duration-300">
+<nav class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 glass-effect">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-2 group cursor-pointer">
+<div class="w-8 h-8 bg-gradient-to-br from-primary to-pink-500 rounded-lg flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="font-bold text-lg">GV</span>
+</div>
+<span class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">GameVerse</span>
+</div>
+<div class="hidden md:flex items-center space-x-1">
+<a class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg text-primary bg-primary/10 transition-all" href="#">
+<span class="material-icons-round text-sm">sports_esports</span> Dashboard
+                    </a>
+<a class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-icons-round text-sm">casino</span> Games
+                    </a>
+<a class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-icons-round text-sm">emoji_events</span> Leaderboard
+                    </a>
+<a class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all relative" href="#">
+<span class="material-icons-round text-sm">chat_bubble</span> Chat
+                        <span class="absolute top-2 right-2 w-2 h-2 bg-pink-500 rounded-full"></span>
+</a>
+<div class="relative group px-2">
+<button class="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                            More <span class="material-icons-round text-xs">expand_more</span>
+</button>
+</div>
+<div class="h-6 w-px bg-slate-200 dark:bg-slate-800 mx-2"></div>
+<a class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-icons-round text-sm">shield</span> Admin
+                    </a>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 transition-all" id="themeToggle">
+<span class="material-icons-round dark:hidden">dark_mode</span>
+<span class="material-icons-round hidden dark:block">light_mode</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-slate-500 hover:text-red-500 transition-all">
+<span class="material-icons-round">logout</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfsrWYrAWaZiqNEJEcNuGLJwK28ufdyW6VzkSt3zt1E3W0L-zUIqggPfAz19zuncMAcwQHy1GFAZcsTticM4XLysMRO9hl9pOHPGAGP6iD-2Ogo9y6bp69xgG1OPOfM9nmljBBTFT6d-6LxkIEkcnR2KI4YQvUDnBpv_tfK0Gh-n6eBfHrhq-pJF4vhI8mARosb45InQ9V68yziPlfAPI171-XObz3T8jvb_v9Fw9JLii35wUlkvjb-b-NV9gDWvRaZfRhrDpLHRGY"/>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<div class="grid lg:grid-cols-3 gap-8">
+<div class="lg:col-span-1 space-y-6">
+<section class="bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-icons-round">add_box</span>
+</div>
+<h2 class="text-xl font-bold">Create a Game</h2>
+</div>
+<form class="space-y-4">
+<div>
+<label class="block text-sm font-medium mb-1.5 opacity-70">Room Name</label>
+<input class="w-full bg-slate-50 dark:bg-slate-900/50 border-slate-200 dark:border-slate-800 rounded-xl focus:ring-primary focus:border-primary transition-all" placeholder="Grandmaster's Den" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1.5 opacity-70">Time Control</label>
+<div class="grid grid-cols-3 gap-2">
+<button class="py-2 border border-slate-200 dark:border-slate-800 rounded-lg text-sm hover:border-primary transition-all" type="button">10m</button>
+<button class="py-2 border-2 border-primary bg-primary/5 text-primary rounded-lg text-sm font-semibold" type="button">15m</button>
+<button class="py-2 border border-slate-200 dark:border-slate-800 rounded-lg text-sm hover:border-primary transition-all" type="button">30m</button>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1.5 opacity-70">Visibility</label>
+<select class="w-full bg-slate-50 dark:bg-slate-900/50 border-slate-200 dark:border-slate-800 rounded-xl focus:ring-primary">
+<option>Public</option>
+<option>Private (Link only)</option>
+</select>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2">
+<span class="material-icons-round">rocket_launch</span>
+                            Launch Room
+                        </button>
+</form>
+</section>
+<section class="bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center">
+<span class="material-icons-round">pin</span>
+</div>
+<h2 class="text-xl font-bold">Join via Code</h2>
+</div>
+<div class="flex gap-2">
+<input class="flex-1 bg-slate-50 dark:bg-slate-900/50 border-slate-200 dark:border-slate-800 rounded-xl focus:ring-primary focus:border-primary transition-all placeholder:text-slate-400" placeholder="Enter 6-digit code" type="number"/>
+<button class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 font-bold rounded-xl hover:opacity-90 transition-all">
+                            Join
+                        </button>
+</div>
+<p class="mt-4 text-xs text-slate-500 dark:text-slate-400">Enter a specific room ID to join a private match with a friend.</p>
+</section>
+</div>
+<div class="lg:col-span-2">
+<div class="bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden flex flex-col h-full">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<div>
+<h2 class="text-2xl font-bold">Public Rooms</h2>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Join an active match and test your skills</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">
+<span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5 animate-pulse"></span>
+                                124 Online
+                            </span>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">
+<span class="material-icons-round text-lg">refresh</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50/50 dark:bg-slate-900/50">
+<th class="px-6 py-4 text-sm font-semibold opacity-60">Room ID</th>
+<th class="px-6 py-4 text-sm font-semibold opacity-60">Host</th>
+<th class="px-6 py-4 text-sm font-semibold opacity-60">Mode</th>
+<th class="px-6 py-4 text-sm font-semibold opacity-60">Players</th>
+<th class="px-6 py-4 text-sm font-semibold opacity-60 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-900/30 transition-all">
+<td class="px-6 py-4 font-mono text-sm">#84219</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-blue-500/10 flex items-center justify-center text-[10px] font-bold text-blue-500">JR</div>
+<span class="font-medium">Junaid</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm">Standard Blitz</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-surface-light dark:border-surface-dark bg-slate-200"></div>
+<div class="w-6 h-6 rounded-full border-2 border-surface-light dark:border-surface-dark bg-slate-400 flex items-center justify-center text-[8px]">+1</div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="px-4 py-1.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-md transition-all">Join</button>
+</td>
+</tr>
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-900/30 transition-all">
+<td class="px-6 py-4 font-mono text-sm">#91203</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-pink-500/10 flex items-center justify-center text-[10px] font-bold text-pink-500">SA</div>
+<span class="font-medium">Sarah_Chess</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm">Rapid Match</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-surface-light dark:border-surface-dark bg-slate-200"></div>
+<div class="w-6 h-6 rounded-full border-2 border-surface-light dark:border-surface-dark bg-primary/20 flex items-center justify-center text-primary text-[10px]"><span class="material-icons-round text-xs">person_add</span></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="px-4 py-1.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-md transition-all">Join</button>
+</td>
+</tr>
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-900/30 transition-all">
+<td class="px-6 py-4 font-mono text-sm">#11044</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-indigo-500/10 flex items-center justify-center text-[10px] font-bold text-indigo-500">MG</div>
+<span class="font-medium">MagnusFan</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm">Bullet</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-surface-light dark:border-surface-dark bg-slate-200"></div>
+<div class="w-6 h-6 rounded-full border-2 border-surface-light dark:border-surface-dark bg-primary/20 flex items-center justify-center text-primary text-[10px]"><span class="material-icons-round text-xs">person_add</span></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="px-4 py-1.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-md transition-all">Join</button>
+</td>
+</tr>
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-900/30 transition-all opacity-50">
+<td class="px-6 py-4 font-mono text-sm">#55281</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-slate-500/10 flex items-center justify-center text-[10px] font-bold text-slate-500">TH</div>
+<span class="font-medium line-through">The_Rook</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm">Standard</span>
+</td>
+<td class="px-6 py-4 text-xs font-semibold text-red-500">FULL</td>
+<td class="px-6 py-4 text-right">
+<button class="px-4 py-1.5 bg-slate-200 dark:bg-slate-800 text-slate-400 text-sm font-bold rounded-lg cursor-not-allowed" disabled="">Full</button>
+</td>
+</tr>
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-900/30 transition-all">
+<td class="px-6 py-4 font-mono text-sm">#00912</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-emerald-500/10 flex items-center justify-center text-[10px] font-bold text-emerald-500">QC</div>
+<span class="font-medium">QueenCheck</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm">Classical</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-surface-light dark:border-surface-dark bg-slate-200"></div>
+<div class="w-6 h-6 rounded-full border-2 border-surface-light dark:border-surface-dark bg-primary/20 flex items-center justify-center text-primary text-[10px]"><span class="material-icons-round text-xs">person_add</span></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="px-4 py-1.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-md transition-all">Join</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-auto p-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-sm">
+<span class="text-slate-500">Showing 5 of 12 active rooms</span>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-900 transition-all disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1 border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-900 transition-all">Next</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+    </script>
+
+</body></html>

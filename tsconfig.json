@@ -25,6 +25,15 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@chess/*": [
+        "./vendor/3d-chess/src/*"
+      ],
+      "@logic/*": [
+        "./vendor/3d-chess/src/logic/*"
+      ],
+      "@models/*": [
+        "./vendor/3d-chess/src/models/*"
       ]
     }
   },

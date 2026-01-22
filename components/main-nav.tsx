@@ -4,6 +4,9 @@ import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { getAvatarUrl } from "@/lib/utils"
+import type { User } from "@supabase/supabase-js"
 import { Menu, X, LogOut, Shield, ChevronDown } from "lucide-react"
 import { useState, useEffect } from "react"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -30,6 +33,9 @@ export function MainNav() {
   const router = useRouter()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
+  const [user, setUser] = useState<User | null>(null)
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null)
+  const [displayName, setDisplayName] = useState<string>("")
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -44,10 +50,22 @@ export function MainNav() {
       } = await supabase.auth.getUser()
 
       if (user) {
-        const { data: profile, error } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle()
+        const { data: profile, error } = await supabase
+          .from("profiles")
+          .select("role, avatar_url, username, first_name, last_name")
+          .eq("id", user.id)
+          .maybeSingle()
         if (!error) {
           setIsAdmin(profile?.role === "admin")
+          setAvatarUrl(getAvatarUrl(profile?.avatar_url || null))
+          const name = (profile?.username || profile?.first_name || user.email || "").trim()
+          setDisplayName(name)
         }
+        setUser(user)
+      } else {
+        setUser(null)
+        setAvatarUrl(null)
+        setDisplayName("")
       }
     }
 
@@ -130,14 +148,45 @@ export function MainNav() {
         <div className="flex items-center gap-2">
           <ThemeToggle />
 
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-muted-foreground hover:text-accent"
-            onClick={handleLogout}
-          >
-            <LogOut className="w-5 h-5" />
-          </Button>
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="rounded-full p-0">
+                  <Avatar>
+                    <AvatarImage src={avatarUrl || undefined} alt={displayName || "Profile"} />
+                    <AvatarFallback>{(displayName || "U").slice(0, 1).toUpperCase()}</AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem asChild>
+                  <Link href="/profile" className="cursor-pointer">
+                    Profile
+                  </Link>
+                </DropdownMenuItem>
+                {isAdmin ? (
+                  <DropdownMenuItem asChild>
+                    <Link href="/admin/dashboard" className="cursor-pointer">
+                      Admin
+                    </Link>
+                  </DropdownMenuItem>
+                ) : null}
+                <DropdownMenuItem
+                  className="cursor-pointer"
+                  onClick={handleLogout}
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Link href="/login">
+              <Button variant="outline" className="border-border bg-transparent">
+                Login
+              </Button>
+            </Link>
+          )}
 
           {/* Mobile Menu Toggle */}
           <button

@@ -5,5 +5,9 @@ export async function middleware(request: any) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.png|.*\\.svg).*)"],
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.png|.*\\.svg).*)",
+    "/api/user/profile",
+    "/api/achievements",
+  ],
 }

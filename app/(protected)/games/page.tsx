@@ -18,6 +18,17 @@ export default function GamesPage() {
     const fetchGames = async () => {
       try {
         const response = await fetch("/api/games")
+        const chessGame: GameCardProps = {
+          id: "3d-chess",
+          name: "3D Chess",
+          category: "Puzzle",
+          players: 42,
+          difficulty: "Medium",
+          thumbnail: "♟️",
+          description: "Real-time multiplayer chess with in-game chat and points",
+          isMultiplayer: true,
+          href: "/chess",
+        }
         const blackjackGame: GameCardProps = {
           id: "blackjack",
           name: "Simple Black Jack",
@@ -41,13 +52,24 @@ export default function GamesPage() {
             description: game.description,
             isMultiplayer: game.is_multiplayer,
           }))
-          setGames([...mapped, blackjackGame])
+          setGames([...mapped, chessGame, blackjackGame])
         } else {
-          setGames([blackjackGame])
+          setGames([chessGame, blackjackGame])
         }
       } catch (error) {
         console.error("Error fetching games:", error)
         setGames([
+          {
+            id: "3d-chess",
+            name: "3D Chess",
+            category: "Puzzle",
+            players: 42,
+            difficulty: "Medium",
+            thumbnail: "♟️",
+            description: "Real-time multiplayer chess with in-game chat and points",
+            isMultiplayer: true,
+            href: "/chess",
+          },
           {
             id: "blackjack",
             name: "Simple Black Jack",

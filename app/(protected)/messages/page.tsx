@@ -48,11 +48,11 @@ export default function MessagesPage() {
     fetchConversations()
 
     // Check if there's a user param to start conversation with
-    const userParam = searchParams.get("user")
+    const userParam = searchParams?.get("user")
     if (userParam) {
       setSelectedUser(userParam)
     }
-  }, [])
+  }, [searchParams])
 
   useEffect(() => {
     if (selectedUser && currentUserId) {
